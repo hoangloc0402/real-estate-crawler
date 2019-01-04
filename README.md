@@ -1,2 +1,3 @@
-# real-estate-crawler
-Scrapy crawler for collecting real estate sales data .
+# Real-estate-Crawler
+Scrapy crawler for collecting real estate sales data from following websites:
+  + mogi.vn
