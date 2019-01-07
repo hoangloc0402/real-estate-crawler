@@ -12,7 +12,7 @@ class Mogi(scrapy.Spider):
     BASE_INTERVAL = 15
 
     # BASE_URLS['HCM-mua-nha'] = 'https://mogi.vn/ho-chi-minh/mua-nha?cp='
-    BASE_URLS['HCM-mua-can-ho'] = 'https://mogi.vn/ho-chi-minh/mua-can-ho?cp='
+    # BASE_URLS['HCM-mua-can-ho'] = 'https://mogi.vn/ho-chi-minh/mua-can-ho?cp='
     # BASE_URLS['HCM-mua-dat'] = 'https://mogi.vn/ho-chi-minh/mua-dat?cp='
     # BASE_URLS['HCM-mua-mat-bang-cua-hang-shop'] = 'https://mogi.vn/ho-chi-minh/mua-mat-bang-cua-hang-shop?cp='
 
@@ -24,7 +24,7 @@ class Mogi(scrapy.Spider):
     # BASE_URLS['HCM-thue-nha-xuong-kho-bai-dat'] = 'https://mogi.vn/ho-chi-minh/thue-nha-xuong-kho-bai-dat?cp='
 
     # BASE_URLS['HN-mua-nha'] = 'https://mogi.vn/ha-noi/mua-nha?cp='
-    # BASE_URLS['HN-mua-can-ho'] = 'https://mogi.vn/ha-noi/mua-can-ho?cp='
+    BASE_URLS['HN-mua-can-ho'] = 'https://mogi.vn/ha-noi/mua-can-ho?cp='
     # BASE_URLS['HN-mua-dat'] = 'https://mogi.vn/ha-noi/mua-dat?cp='
     # BASE_URLS['HN-mua-mat-bang-cua-hang-shop'] = 'https://mogi.vn/ha-noi/mua-mat-bang-cua-hang-shop?cp='
 
@@ -45,13 +45,14 @@ class Mogi(scrapy.Spider):
 
 
     def parse_max_index(self, response):
-            count = response.xpath('//*[@id="main"]/div[3]/div/div[1]/b[2]/text()').extract()[0].strip()
-            self.MAX_ARTICLE_INDEX = int(count.replace('.', ''))
+        count = response.xpath('//*[@id="main"]/div[2]/div/div[1]/b[2]/text()').extract()[0].strip()
 
-            for i in range(0, int(self.MAX_ARTICLE_INDEX / self.BASE_INTERVAL) + 2):
-                url = self.CURRENT_BASE_URL + str(i)
-                yield scrapy.Request(url = url, callback = self.parse_url)
-            return count
+        self.MAX_ARTICLE_INDEX = int(count.replace('.', ''))
+
+        for i in range(0, int(self.MAX_ARTICLE_INDEX / self.BASE_INTERVAL) + 2):
+            url = self.CURRENT_BASE_URL + str(i)
+            yield scrapy.Request(url = url, callback = self.parse_url)
+        return count
 
 
     def parse_url(self, response):
