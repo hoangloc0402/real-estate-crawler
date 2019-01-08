@@ -32,9 +32,9 @@ class Mogi(scrapy.Spider):
     # BASE_URLS['HN-cho-thue-can-ho-chung-cu'] = 'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-ha-noi/'
     # BASE_URLS['HN-cho-thue-nha-rieng'] = 'https://batdongsan.com.vn/cho-thue-nha-rieng-ha-noi/'
     # BASE_URLS['HN-cho-thue-nha-mat-pho'] = 'https://batdongsan.com.vn/cho-thue-nha-mat-pho-ha-noi/'
-    # BASE_URLS['HN-cho-thue-nha-tro-phong-tro'] = 'https://batdongsan.com.vn/cho-thue-nha-tro-phong-tro-ha-noi/'
+    BASE_URLS['HN-cho-thue-nha-tro-phong-tro'] = 'https://batdongsan.com.vn/cho-thue-nha-tro-phong-tro-ha-noi/'
     # BASE_URLS['HN-cho-thue-van-phong'] = 'https://batdongsan.com.vn/cho-thue-van-phong-ha-noi/'
-    BASE_URLS['HN-cho-thue-cua-hang-ki-ot'] = 'https://batdongsan.com.vn/cho-thue-cua-hang-ki-ot-ha-noi'
+    # BASE_URLS['HN-cho-thue-cua-hang-ki-ot'] = 'https://batdongsan.com.vn/cho-thue-cua-hang-ki-ot-ha-noi'
     # BASE_URLS['HN-cho-thue-kho-nha-xuong-dat'] = 'https://batdongsan.com.vn/cho-thue-kho-nha-xuong-dat-ha-noi'
 
 
@@ -49,7 +49,6 @@ class Mogi(scrapy.Spider):
     def parse_url(self, response):
         article_urls = response.css('.Main .search-productItem .p-title a::attr(href)').extract()
         for url in article_urls:
-            print(url)
             self.CURRENT_URL = self.PREFIX + url
             yield scrapy.Request(url = self.CURRENT_URL, callback=self.parse_article)
         
@@ -75,8 +74,8 @@ class Mogi(scrapy.Spider):
         # article['legal_papers']     = response.xpath('//*[@id="property-info"]/div[1]/ul[2]/li[3]/text()').extract()[0].strip()
         # article['direction']        = response.xpath('//*[@id="property-info"]/div[1]/ul[2]/li[4]/text()').extract()[0].strip()
         article['description']      = "\n".join(response.xpath('//*[@id="product-detail"]/div[5]/div[1]/text()').extract()).strip()
-        for key, text in article.items():
-            print("{key}: {text}".format(key = key.upper(), text = text))
+        # for key, text in article.items():
+        #     print("{key}: {text}".format(key = key.upper(), text = text))
 
         return article
 
