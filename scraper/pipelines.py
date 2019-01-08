@@ -4,7 +4,7 @@ class ScraperPipeline(object):
 	def __init__(self):
         # self.collection = connect_db("crawler")["news"]
 		self.count = 0
-		self.ROOT_DIRECTORY = "D:/Data/chotot"
+		self.ROOT_DIRECTORY = "/home/cpu10133-local/Projects/Data/bds/"
 
 	def process_item(self, item, spider):
 		# self.collection.insert_one(item)

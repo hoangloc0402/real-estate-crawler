@@ -59,7 +59,7 @@ class Mogi(scrapy.Spider):
         article_urls = response.css('.props .prop-title a.link-overlay::attr(href)').extract()
         for url in article_urls:
             self.CURRENT_URL = self.PREFIX + url
-            yield scrapy.Request(self.CURRENT_URL, callback=self.parse_article)
+            yield scrapy.Request(url = self.CURRENT_URL, callback=self.parse_article)
 
         # next_page_url = response.css('.paging .pagination li:last-child a::attr(href)').extract_first()
         # if next_page_url is not None:
