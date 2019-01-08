@@ -25,19 +25,13 @@ https://mogi.vn/ha-noi/thue-mat-bang-cua-hang-shop 1278
 https://mogi.vn/ha-noi/thue-nha-xuong-kho-bai-dat  118
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-	COMPETE!
+	INCOMPETE!
 
 https://batdongsan.com.vn/ban-can-ho-chung-cu-tp-hcm 25835
 https://batdongsan.com.vn/ban-nha-dat-tp-hcm 44255
 https://batdongsan.com.vn/ban-dat-dat-nen-tp-hcm 25059
 https://batdongsan.com.vn/ban-kho-nha-xuong-tp-hcm 212
 https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-tp-hcm 518
-
-https://batdongsan.com.vn/ban-can-ho-chung-cu-ha-noi 16081
-https://batdongsan.com.vn/ban-nha-dat-ha-noi 26264
-https://batdongsan.com.vn/ban-dat-dat-nen-ha-noi 6332
-https://batdongsan.com.vn/ban-kho-nha-xuong-ha-noi 53
-https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-ha-noi 330
 
 https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-tp-hcm 10010
 https://batdongsan.com.vn/cho-thue-nha-rieng-tp-hcm 2370
@@ -46,6 +40,14 @@ https://batdongsan.com.vn/cho-thue-nha-tro-phong-tro-tp-hcm 1441
 https://batdongsan.com.vn/cho-thue-van-phong-tp-hcm 1521
 https://batdongsan.com.vn/cho-thue-cua-hang-ki-ot-tp-hcm 1111
 https://batdongsan.com.vn/cho-thue-kho-nha-xuong-dat-tp-hcm 1083
+
+https://batdongsan.com.vn/ban-can-ho-chung-cu-ha-noi 16081
+https://batdongsan.com.vn/ban-nha-dat-ha-noi 26264
+
+	COMPLETE!
+https://batdongsan.com.vn/ban-dat-dat-nen-ha-noi 6332
+https://batdongsan.com.vn/ban-kho-nha-xuong-ha-noi 53
+https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-ha-noi 330
 
 https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-ha-noi 8379
 https://batdongsan.com.vn/cho-thue-nha-rieng-ha-noi 1883
@@ -56,7 +58,7 @@ https://batdongsan.com.vn/cho-thue-cua-hang-ki-ot-ha-noi 1029
 https://batdongsan.com.vn/cho-thue-kho-nha-xuong-dat-ha-noi 552
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-
+	INCOMPETE!
 https://nha.chotot.com/tp-ho-chi-minh/mua-ban-can-ho-chung-cu
 https://nha.chotot.com/tp-ho-chi-minh/mua-ban-nha-dat
 https://nha.chotot.com/tp-ho-chi-minh/mua-ban-dat

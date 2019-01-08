@@ -3,7 +3,7 @@ import math
 
 class Mogi(scrapy.Spider):
     name = "bds"
-    PREFIX = 'https://batdongsan.com.vn/'
+    PREFIX = 'https://batdongsan.com.vn'
     CURRENT_DOMAIN = 'HCM-ban-can-ho-chung-cu'
     CURRENT_URL = ''
     BASE_URLS = dict()
@@ -25,14 +25,14 @@ class Mogi(scrapy.Spider):
 
     # BASE_URLS['HN-ban-can-ho-chung-cu'] = 'https://batdongsan.com.vn/ban-can-ho-chung-cu-ha-noi/'
     # BASE_URLS['HN-ban-nha-dat'] = 'https://batdongsan.com.vn/ban-nha-dat-ha-noi/'
-    # BASE_URLS['HN-ban-dat-dat-nen'] = 'https://batdongsan.com.vn/ban-dat-dat-nen-ha-noi'
+    BASE_URLS['HN-ban-dat-dat-nen'] = 'https://batdongsan.com.vn/ban-dat-dat-nen-ha-noi'
     # BASE_URLS['HN-ban-kho-nha-xuong'] = 'https://batdongsan.com.vn/ban-kho-nha-xuong-ha-noi/'
     # BASE_URLS['HN-ban-loai-bat-dong-san-khac'] = 'https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-ha-noi/'
 
     # BASE_URLS['HN-cho-thue-can-ho-chung-cu'] = 'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-ha-noi/'
     # BASE_URLS['HN-cho-thue-nha-rieng'] = 'https://batdongsan.com.vn/cho-thue-nha-rieng-ha-noi/'
     # BASE_URLS['HN-cho-thue-nha-mat-pho'] = 'https://batdongsan.com.vn/cho-thue-nha-mat-pho-ha-noi/'
-    BASE_URLS['HN-cho-thue-nha-tro-phong-tro'] = 'https://batdongsan.com.vn/cho-thue-nha-tro-phong-tro-ha-noi/'
+    # BASE_URLS['HN-cho-thue-nha-tro-phong-tro'] = 'https://batdongsan.com.vn/cho-thue-nha-tro-phong-tro-ha-noi/'
     # BASE_URLS['HN-cho-thue-van-phong'] = 'https://batdongsan.com.vn/cho-thue-van-phong-ha-noi/'
     # BASE_URLS['HN-cho-thue-cua-hang-ki-ot'] = 'https://batdongsan.com.vn/cho-thue-cua-hang-ki-ot-ha-noi'
     # BASE_URLS['HN-cho-thue-kho-nha-xuong-dat'] = 'https://batdongsan.com.vn/cho-thue-kho-nha-xuong-dat-ha-noi'
@@ -52,7 +52,6 @@ class Mogi(scrapy.Spider):
             self.CURRENT_URL = self.PREFIX + url
             yield scrapy.Request(url = self.CURRENT_URL, callback=self.parse_article)
         
-
         next_page_url = response.xpath('//*[@id="form1"]/div[4]/div[6]/div[3]/div/div[3]/div/a[contains(., "...")]/@href').extract()[-1]
         if next_page_url is not None:
             yield scrapy.Request(self.PREFIX + next_page_url, callback=self.parse_url)
