@@ -11,7 +11,7 @@ class Mogi(scrapy.Spider):
 
     # BASE_URLS['HCM-ban-can-ho-chung-cu'] = 'https://batdongsan.com.vn/ban-can-ho-chung-cu-tp-hcm/'
     # BASE_URLS['HCM-ban-nha-dat'] = 'https://batdongsan.com.vn/ban-nha-dat-tp-hcm/'
-    # BASE_URLS['HCM-ban-dat-dat-nen'] = 'https://batdongsan.com.vn/ban-dat-dat-nen-tp-hcm'
+    BASE_URLS['HCM-ban-dat-dat-nen'] = 'https://batdongsan.com.vn/ban-dat-dat-nen-tp-hcm'
     # BASE_URLS['HCM-ban-kho-nha-xuong'] = 'https://batdongsan.com.vn/ban-kho-nha-xuong-tp-hcm/'
     # BASE_URLS['HCM-ban-loai-bat-dong-san-khac'] = 'https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-tp-hcm/'
 
@@ -24,7 +24,7 @@ class Mogi(scrapy.Spider):
     # BASE_URLS['HCM-cho-thue-kho-nha-xuong-dat'] = 'https://batdongsan.com.vn/cho-thue-kho-nha-xuong-dat-tp-hcm'
 
     # BASE_URLS['HN-ban-can-ho-chung-cu'] = 'https://batdongsan.com.vn/ban-can-ho-chung-cu-ha-noi/'
-    BASE_URLS['HN-ban-nha-dat'] = 'https://batdongsan.com.vn/ban-nha-dat-ha-noi/'
+    # BASE_URLS['HN-ban-nha-dat'] = 'https://batdongsan.com.vn/ban-nha-dat-ha-noi/'
     # BASE_URLS['HN-ban-dat-dat-nen'] = 'https://batdongsan.com.vn/ban-dat-dat-nen-ha-noi'
     # BASE_URLS['HN-ban-kho-nha-xuong'] = 'https://batdongsan.com.vn/ban-kho-nha-xuong-ha-noi/'
     # BASE_URLS['HN-ban-loai-bat-dong-san-khac'] = 'https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-ha-noi/'

@@ -29,6 +29,9 @@ https://mogi.vn/ha-noi/thue-nha-xuong-kho-bai-dat  118
 
 https://batdongsan.com.vn/ban-can-ho-chung-cu-tp-hcm 25835
 https://batdongsan.com.vn/ban-nha-dat-tp-hcm 44255
+
+
+	COMPLETE!
 https://batdongsan.com.vn/ban-dat-dat-nen-tp-hcm 25059
 https://batdongsan.com.vn/ban-kho-nha-xuong-tp-hcm 212
 https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-tp-hcm 518
@@ -43,8 +46,6 @@ https://batdongsan.com.vn/cho-thue-kho-nha-xuong-dat-tp-hcm 1083
 
 https://batdongsan.com.vn/ban-can-ho-chung-cu-ha-noi 16081
 https://batdongsan.com.vn/ban-nha-dat-ha-noi 26264
-
-	COMPLETE!
 https://batdongsan.com.vn/ban-dat-dat-nen-ha-noi 6332
 https://batdongsan.com.vn/ban-kho-nha-xuong-ha-noi 53
 https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-ha-noi 330
