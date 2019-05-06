@@ -2,7 +2,7 @@ import os
 from pymongo import MongoClient
 class ScraperPipeline(object):
 	def __init__(self):
-		self.collection = MongoClient("mongodb://localhost:27017")["real_estate_data"]["mogi"]
+		self.collection = MongoClient("mongodb://localhost:27017")["real_estate_data2"]["mogi-HN-thue-nha-xuong-kho-bai-dat"]
 		# self.count = 0
 		# self.ROOT_DIRECTORY = "/home/cpu10133-local/Projects/Data/bds/"
 

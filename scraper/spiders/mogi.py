@@ -1,5 +1,6 @@
 import scrapy
 import math
+import re
 
 class Mogi(scrapy.Spider):
     name = "mogi"
@@ -9,13 +10,14 @@ class Mogi(scrapy.Spider):
     CURRENT_BASE_URL = ''
     MAX_ARTICLE_INDEX = 0
     BASE_INTERVAL = 15
+    re_address = "\<div class\=\"address nowrap\"\>[^\<]*\<\/div\>"
 
     #Mỗi lần crawl chỉ nên mở chú thích cho 1 url
 
-    # BASE_URLS['HCM-mua-nha'] = 'https://mogi.vn/ho-chi-minh/mua-nha?cp='
-    # BASE_URLS['HCM-mua-can-ho'] = 'https://mogi.vn/ho-chi-minh/mua-can-ho?cp='
-    # BASE_URLS['HCM-mua-dat'] = 'https://mogi.vn/ho-chi-minh/mua-dat?cp='
-    # BASE_URLS['HCM-mua-mat-bang-cua-hang-shop'] = 'https://mogi.vn/ho-chi-minh/mua-mat-bang-cua-hang-shop?cp='
+#     BASE_URLS['HCM-mua-nha'] = 'https://mogi.vn/ho-chi-minh/mua-nha?cp='
+#     BASE_URLS['HCM-mua-can-ho'] = 'https://mogi.vn/ho-chi-minh/mua-can-ho?cp='
+#     BASE_URLS['HCM-mua-dat'] = 'https://mogi.vn/ho-chi-minh/mua-dat?cp='
+#     BASE_URLS['HCM-mua-mat-bang-cua-hang-shop'] = 'https://mogi.vn/ho-chi-minh/mua-mat-bang-cua-hang-shop?cp='
 
     # BASE_URLS['HCM-thue-nha'] = 'https://mogi.vn/ho-chi-minh/thue-nha?cp='
     # BASE_URLS['HCM-thue-can-ho'] = 'https://mogi.vn/ho-chi-minh/thue-can-ho?cp='
@@ -24,8 +26,8 @@ class Mogi(scrapy.Spider):
     # BASE_URLS['HCM-thue-mat-bang-cua-hang-shop'] = 'https://mogi.vn/ho-chi-minh/thue-mat-bang-cua-hang-shop?cp='
     # BASE_URLS['HCM-thue-nha-xuong-kho-bai-dat'] = 'https://mogi.vn/ho-chi-minh/thue-nha-xuong-kho-bai-dat?cp='
 
+
     # BASE_URLS['HN-mua-nha'] = 'https://mogi.vn/ha-noi/mua-nha?cp='
-    
     # BASE_URLS['HN-mua-dat'] = 'https://mogi.vn/ha-noi/mua-dat?cp='
     # BASE_URLS['HN-mua-mat-bang-cua-hang-shop'] = 'https://mogi.vn/ha-noi/mua-mat-bang-cua-hang-shop?cp='
     # BASE_URLS['HN-mua-can-ho'] = 'https://mogi.vn/ha-noi/mua-can-ho?cp='
@@ -35,7 +37,7 @@ class Mogi(scrapy.Spider):
     # BASE_URLS['HN-thue-phong-tro-nha-tro'] = 'https://mogi.vn/ha-noi/thue-phong-tro-nha-tro?cp='
     # BASE_URLS['HN-thue-van-phong'] = 'https://mogi.vn/ha-noi/thue-van-phong?cp='
     # BASE_URLS['HN-thue-mat-bang-cua-hang-shop'] = 'https://mogi.vn/ha-noi/thue-mat-bang-cua-hang-shop?cp='
-    # BASE_URLS['HN-thue-nha-xuong-kho-bai-dat'] = 'https://mogi.vn/ha-noi/thue-nha-xuong-kho-bai-dat?cp='
+    BASE_URLS['HN-thue-nha-xuong-kho-bai-dat'] = 'https://mogi.vn/ha-noi/thue-nha-xuong-kho-bai-dat?cp='
 
 
     def start_requests(self):
@@ -46,7 +48,8 @@ class Mogi(scrapy.Spider):
             yield scrapy.Request(url = base_url, callback = self.parse_max_index)
 
     def parse_max_index(self, response):
-        count = response.xpath('//*[@id="main"]/div[3]/div/div[1]/b[2]/text()').extract()[0].strip()
+        count = response.xpath('//*[@id="main"]/div[2]/div/div[1]/b[2]/text()').extract()[0].strip()
+        # count = response.xpath('//*[@id="main"]/div[3]/div/div[1]/b[2]/text()').extract()[0].strip()
 
         self.MAX_ARTICLE_INDEX = int(count.replace('.', ''))
 
@@ -68,20 +71,35 @@ class Mogi(scrapy.Spider):
 
     def parse_article(self, response):
         article = dict()
+        print(response.body)
+        #main > div.prop-intro.clearfix > div.ng-scope > div > div.address.nowrap
+        
+
         article['domain'] = self.CURRENT_DOMAIN
         article['url'] = response.url   
-        article['tittle']           = response.xpath('//*[@id="breadcrumb"]/div/ul/li[6]/span/text()').extract()[0].strip()  
-        # article['address']          = response.css('#main > div.prop-intro.clearfix > div.ng-scope > div > div.address.nowrap').extract_first().strip()
+        article['tittle']           = response.xpath('//*[@id="breadcrumb"]/div/ul/li[6]/span/text()').extract()[0].strip()
+        article['address']          = re.findall(self.re_address, str(response.text))[0].replace("<div class=\"address nowrap\">", "").replace("</div>", "").strip()
+        article['publish_date']     = response.xpath('//*[@id="prop-info"]/ul[1]/li[4]/text()').extract()[0].strip()[2:]
+        article['real_estate_id']   = response.xpath('//*[@id="prop-info"]/ul[1]/li[5]/text()').extract()[0].strip()[2:]
+        article['description']      = "\n".join(response.xpath('//*[@id="property-info"]/div[2]/text()').extract()).strip()
+        
+        domain = self.CURRENT_DOMAIN.split("-")
+        article['addr_city'] = domain[0]
+        article['transaction_type'] = domain[1]
+        article['realestate_type'] = " ".join(domain[2:])
         article['price']            = response.xpath('//*[@id="prop-info"]/ul[1]/li[1]/text()').extract()[0].strip()[2:]
         article['usable_area']      = response.xpath('//*[@id="prop-info"]/ul[1]/li[2]/text()').extract()[0].strip()[2:]
         article['area']             = response.xpath('//*[@id="prop-info"]/ul[1]/li[3]/text()').extract()[0].strip()[2:]
-        article['publish_date']     = response.xpath('//*[@id="prop-info"]/ul[1]/li[4]/text()').extract()[0].strip()[2:]
-        article['real_estate_id']   = response.xpath('//*[@id="prop-info"]/ul[1]/li[5]/text()').extract()[0].strip()[2:]
-        article['bedroom']          = response.xpath('//*[@id="prop-info"]/ul[2]/li[1]/text()').extract()[0].strip()[2:]
-        article['bathroom']         = response.xpath('//*[@id="prop-info"]/ul[2]/li[2]/text()').extract()[0].strip()[2:]
         article['legal']            = response.xpath('//*[@id="prop-info"]/ul[2]/li[3]/text()').extract()[0].strip()[2:]
         article['orientation']      = response.xpath('//*[@id="prop-info"]/ul[2]/li[4]/text()').extract()[0].strip()[2:]
-        article['description']      = "\n".join(response.xpath('//*[@id="property-info"]/div[2]/text()').extract()).strip()
+        bedroom          = response.xpath('//*[@id="prop-info"]/ul[2]/li[1]/text()').extract()[0].strip()[2:]
+        bathroom         = response.xpath('//*[@id="prop-info"]/ul[2]/li[2]/text()').extract()[0].strip()[2:]
+        article['interior_floor'] = list()
+        if (len(bedroom)!=0):
+            article['interior_floor'].append({"type":"phong ngu", "value": int(bedroom)})
+        if (len(bathroom)!=0):
+            article['interior_floor'].append({"type":"nha ve sinh", "value": int(bathroom)})
+        
         # for key, text in article.items():
         #     print("{key}: {text}".format(key = key.upper(), text = text))
 
